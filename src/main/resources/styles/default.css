@@ -1,0 +1,62 @@
+
+/*.root {*/
+/*    -fx-focus-color: transparent;*/
+/*    -fx-faint-focus-color: transparent;*/
+
+/*.text-input {*/
+/*    -fx-highlight-fill: lightgray;*/
+/*    -fx-highlight-text-fill: black;*/
+/*}*/
+
+/* Color when focused */
+.text-input,
+.text-input:focused {
+    -fx-highlight-fill: #2596be;
+    -fx-highlight-text-fill: #ffffff;
+}
+
+/*    -fx-background-color: black;*/
+/*}*/
+
+/*!*MENU*!*/
+/*.menu-bar {*/
+/*    -fx-base: #e7e8e8;*/
+/*}*/
+
+/*!*TOOLBAR*!*/
+/*.bottomMenuBox {*/
+/*   -fx-background-color: #dfe1e1;*/
+/*}*/
+
+/*.bottomMenuBox .tool-bar {*/
+/*    -fx-background-color: transparent;*/
+/*    -fx-spacing: 10px;*/
+/*    -fx-padding: 8px 16px 8px 16px;*/
+/*}*/
+
+/*.bottomMenuBox .tool-bar .button {*/
+/*    -fx-base: #b0b4b5; !*#76767e*!*/
+/*    -fx-border-width: 2px;*/
+/*    -fx-border-color: #919698;*/
+/*    -fx-border-radius: 3px;*/
+/*    -fx-background-radius: 3px;*/
+/*    -fx-background-inset: 0px;*/
+/*    -fx-padding: 3px;*/
+/*}*/
+
+/*.bottomMenuBox .tool-bar .button .tooltip {*/
+/*    -fx-font-size: 11px;*/
+/*    -fx-padding: 3px 8px 3px 8px;*/
+/*}*/
+
+/*!*EDITOR*!*/
+/*.tab-pane {*/
+
+/*}*/
+
+/*!*SEPARATOR*!*/
+/*.separator:vertical .line {*/
+/*    -fx-pref-width: 1px;*/
+/*    -fx-background-color: #919698;*/
+/*    -fx-border-width: 0px;*/
+/*}*/

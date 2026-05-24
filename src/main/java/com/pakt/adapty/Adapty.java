@@ -1,0 +1,38 @@
+package com.pakt.adapty;
+
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.Objects;
+
+public class Adapty extends Application {
+
+    public static Stage stage;
+    public static BorderPane root;
+
+    @Override
+    public void start(Stage primaryStage) throws IOException {
+        stage = primaryStage;
+        root = FXMLLoader.load(Objects.requireNonNull(
+                Adapty.class.getResource("/views/main.fxml")));
+        var scene = new Scene(root);
+        var closeApp = new KeyCodeCombination(KeyCode.ESCAPE, KeyCombination.CONTROL_DOWN);
+        scene.setOnKeyPressed(event -> {
+            if (closeApp.match(event)) Platform.exit();
+        });
+        stage.setScene(scene);
+        stage.setTitle("Adapty");
+        stage.setMinWidth(700.0);
+        stage.setMinHeight(520.0);
+        stage.show();
+        stage.centerOnScreen();
+    }
+}

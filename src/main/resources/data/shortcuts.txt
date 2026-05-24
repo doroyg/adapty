@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+All standard text area shortcuts plus these:
+-------------------------------------------------------------------------------
+Close Application						Ctrl + ESC
+
+New Tab								Ctrl + T
+Close Tab							Ctrl + X
+Next Tab							Ctrl + TAB
+
+Open File							Ctrl + O
+Save File								Ctrl + S
+Save As File					    Shift + Ctrl + S
