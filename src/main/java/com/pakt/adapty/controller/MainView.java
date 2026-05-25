@@ -44,6 +44,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class MainView {
@@ -64,11 +66,6 @@ public class MainView {
     public MenuItem pasteMenuItem;
     public MenuItem deleteMenuItem;
     public MenuItem clearMenuItem;
-
-    public RadioMenuItem numberListItem;
-    public RadioMenuItem letterListItem;
-    public RadioMenuItem bulletListItem;
-    public RadioMenuItem noneListItem;
 
     public RadioMenuItem lightThemeMenuItem;
     public RadioMenuItem darkThemeMenuItem;
@@ -98,41 +95,22 @@ public class MainView {
     public static Stage fontStage;
 
     private final ToggleGroup themeGroup = new ToggleGroup();
-    private final ToggleGroup listGroup = new ToggleGroup();
     public static final Path editorSettingsPath = Paths.get(
             "src/main/resources/data/editor-settings.properties");
+
     private boolean isWrap;
     private Theme selectedTheme;
-    public static String listFormat = "bullet";
 
     public void initialize() {
         var svgContentMap = new SvgContentMap();
         var mapData = svgContentMap.getMapData();
         HBox.setHgrow(footerRegion, Priority.ALWAYS);
 
-        numberListItem.setToggleGroup(listGroup);
-        letterListItem.setToggleGroup(listGroup);
-        bulletListItem.setToggleGroup(listGroup);
-        noneListItem.setToggleGroup(listGroup);
-        listGroup.selectToggle(noneListItem);
-        //
-        listGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.equals(noneListItem)) {
-                listFormat = "none";
-            } else if (newValue.equals(numberListItem)) {
-                listFormat = "number";
-            } else if (newValue.equals(letterListItem)) {
-                listFormat = "letter";
-            } else if (newValue.equals(bulletListItem)) {
-                listFormat = "bullet";
-            }
-        }); //
-
         lightThemeMenuItem.setToggleGroup(themeGroup);
         darkThemeMenuItem.setToggleGroup(themeGroup);
         defaultThemeMenuItem.setToggleGroup(themeGroup);
         themeGroup.selectedToggleProperty().addListener(
-                (observable, oldValue, newValue) -> {
+                (_, _, newValue) -> {
                     var selectedToggle = (RadioMenuItem) newValue;
                     if (selectedToggle == lightThemeMenuItem) selectedTheme = Theme.LIGHT;
                     else if (selectedToggle == darkThemeMenuItem) selectedTheme = Theme.DARK;
@@ -161,25 +139,17 @@ public class MainView {
         printButton.setTooltip(new Tooltip("Print"));
 
         tabPane.getSelectionModel().selectedItemProperty().addListener(
-                (obs, oldT, newT) -> {
+                (_, _, newT) -> {
                     currentTab = (NewTab) newT;
-                    var ta = currentTab.getTextArea();
-                    Platform.runLater(ta::requestFocus);
+                    var currentTextArea = currentTab.getTextArea();
+                    Platform.runLater(currentTextArea::requestFocus);
                     loadFont();
-                    ta.setWrapText(wrapMenuItem.isSelected());
-
-                    var file = currentTab.getFile();
-                    if (file != null) {
-                        if (FileIO.isTextFile(file.toPath())) {
-                            notificationLabel.setText(file.getAbsolutePath());
-                        }
-                    } else {
-                        notificationLabel.setText("");
-                    }
+                    currentTextArea.setWrapText(wrapMenuItem.isSelected());
+                    updateNotificationLabel();
                 }
         );
         wrapMenuItem.selectedProperty().addListener(
-                (observable, oldValue, newValue) -> {
+                (_, _, newValue) -> {
                     currentTab.getTextArea().setWrapText(newValue);
                     isWrap = newValue;
                 }
@@ -272,19 +242,6 @@ public class MainView {
         });
     }
 
-    private boolean isCaretOnNewline() {
-        var textArea = currentTab.getTextArea();
-        var caretPos = textArea.getCaretPosition();
-        var text = textArea.getText();
-
-        var isOnNewline = false;
-        if (caretPos > 0 && caretPos < text.length()) {
-            // Check if the character right before the caret is a newline
-            isOnNewline = text.charAt(caretPos - 1) == '\n';
-        }
-        return isOnNewline;
-    }
-
     public void newFileItemAction() {
         createTab();
     }
@@ -371,24 +328,56 @@ public class MainView {
         }
     }
 
-    public void numberListAction() {
-
+    public void smileysItemAction() {
+        try {
+            var smileysStage = new Stage();
+            AnchorPane smileysView = FXMLLoader.load(Objects.requireNonNull(
+                    Adapty.class.getResource("/views/smileys.fxml")));
+            var scene = new Scene(smileysView);
+            smileysStage.setResizable(false);
+            smileysStage.initOwner(Adapty.stage);
+            smileysStage.initStyle(StageStyle.UTILITY);
+            smileysStage.initModality(Modality.WINDOW_MODAL);
+            smileysStage.setScene(scene);
+            smileysStage.show();
+            smileysStage.centerOnScreen();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public void letterListAction() {
-
-    }
-
-    public void bulletListAction() {
-
-    }
-
-    public void noneListAction() {
-
+    public void dateTimeAction() {
+        if (currentTab != null) {
+            var currentTextArea = currentTab.getTextArea();
+            var caretPos = currentTextArea.getCaretPosition();
+            var dateTime = LocalDateTime.now();
+            var formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+            var dateTimeText = dateTime.format(formatter);
+            var selectionIndex = currentTextArea.getSelection();
+            if (selectionIndex.getLength() > 0) {
+                currentTextArea.replaceSelection(dateTimeText);
+            } else {
+                currentTextArea.insertText(caretPos, dateTime.format(formatter));
+            }
+        }
     }
 
     public void searchItemAction() {
-        showSearchView();
+        try {
+            var searchStage = new Stage();
+            AnchorPane searchView = FXMLLoader.load(Objects.requireNonNull(
+                    Adapty.class.getResource("/views/search.fxml")));
+            var scene = new Scene(searchView);
+            searchStage.setResizable(false);
+            searchStage.initOwner(Adapty.stage);
+            searchStage.initStyle(StageStyle.UTILITY);
+            searchStage.initModality(Modality.WINDOW_MODAL);
+            searchStage.setScene(scene);
+            searchStage.show();
+            searchStage.centerOnScreen();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void fontAction() {
@@ -608,24 +597,6 @@ public class MainView {
         return svgShape;
     }
 
-    private void showSearchView() {
-        try {
-            var searchStage = new Stage();
-            AnchorPane searchView = FXMLLoader.load(Objects.requireNonNull(
-                    Adapty.class.getResource("/views/search.fxml")));
-            var scene = new Scene(searchView);
-            searchStage.setResizable(false);
-            searchStage.initOwner(Adapty.stage);
-            searchStage.initStyle(StageStyle.UTILITY);
-            searchStage.initModality(Modality.WINDOW_MODAL);
-            searchStage.setScene(scene);
-            searchStage.show();
-            searchStage.centerOnScreen();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     private void showFontView() { // WORK ON THIS -> FONT VIEW
         try {
             fontStage = new Stage();
@@ -641,6 +612,17 @@ public class MainView {
             fontStage.centerOnScreen();
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private void updateNotificationLabel() {
+        var file = currentTab.getFile();
+        if (file != null) {
+            if (FileIO.isTextFile(file.toPath())) {
+                notificationLabel.setText(file.getAbsolutePath());
+            }
+        } else {
+            notificationLabel.setText("");
         }
     }
 }

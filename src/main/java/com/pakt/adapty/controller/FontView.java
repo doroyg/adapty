@@ -2,7 +2,6 @@ package com.pakt.adapty.controller;
 
 import com.pakt.adapty.util.UIConfig;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -24,11 +23,6 @@ public class FontView {
     public Button applyButton;
     public CheckBox fontPosture;
 
-    private ObservableList<String> fontFamilies;
-    private ObservableList<FontWeight> fontWeights;
-    private ObservableList<Double> fontSizes;
-    private Double[] sizes;
-
     private String currentFontFamily;
     private FontWeight currentFontWeight;
     private double currentFontSize;
@@ -37,18 +31,15 @@ public class FontView {
     public static final Path fontSettingsPath = Paths.get("src/main/resources/data/font-settings.properties");
 
     public void initialize() {
-        //getting data for listviews
-        fontFamilies = FXCollections.observableArrayList(Font.getFamilies());
-        fontWeights = FXCollections.observableArrayList(Arrays.asList(FontWeight.values()));
-        sizes = getSizes();
-        fontSizes = FXCollections.observableArrayList(Arrays.asList(sizes));
+        var fontFamilies = FXCollections.observableArrayList(Font.getFamilies());
+        var fontWeights = FXCollections.observableArrayList(Arrays.asList(FontWeight.values()));
+        var sizes = getSizes();
+        var fontSizes = FXCollections.observableArrayList(Arrays.asList(sizes));
 
-        //populate listviews
         fontFamilyList.setItems(fontFamilies);
         fontWeightList.setItems(fontWeights);
         fontSizeList.setItems(fontSizes);
 
-        // var userFont = getUserFont(); // load from config
         var savedFontProperties = new UIConfig(fontSettingsPath).getProperties();
         fontFamilyList.getSelectionModel().select(savedFontProperties.getProperty("family"));
         fontFamilyList.scrollTo(savedFontProperties.getProperty("family"));
@@ -58,7 +49,6 @@ public class FontView {
         fontSizeList.getSelectionModel().select(Double.parseDouble(savedFontProperties.getProperty("size")));
         fontSizeList.scrollTo(Double.parseDouble(savedFontProperties.getProperty("size")));
 
-        // assign the loaded font configs to current font
         currentFontFamily = fontFamilyList.getSelectionModel().getSelectedItem();
         currentFontWeight = fontWeightList.getSelectionModel().getSelectedItem();
         currentFontPosture = (fontPosture.isSelected()) ? FontPosture.ITALIC : FontPosture.REGULAR;
@@ -68,23 +58,26 @@ public class FontView {
                 Font.font(currentFontFamily, currentFontWeight, currentFontPosture, currentFontSize));
 
         fontFamilyList.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> {
+                (_, _, newValue) -> {
                     currentFontFamily = newValue;
                     sampleLabel.setFont(Font.font(currentFontFamily, currentFontWeight, currentFontPosture, currentFontSize));
                 });
         fontWeightList.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> {
+                (_, _, newValue) -> {
                     currentFontWeight = newValue;
                     sampleLabel.setFont(Font.font(currentFontFamily, currentFontWeight, currentFontPosture, currentFontSize));
                 });
         fontSizeList.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> {
-                    if (newValue > 23.0) currentFontSize = 23.0;
-                    else currentFontSize = newValue;
-                    sampleLabel.setFont(Font.font(currentFontFamily, currentFontWeight, currentFontPosture, currentFontSize));
+                (_, _, newValue) -> {
+                    currentFontSize = newValue;
+                    if (newValue > 23.0) {
+                        sampleLabel.setFont(Font.font(currentFontFamily, currentFontWeight, currentFontPosture, 23.0));
+                    } else {
+                        sampleLabel.setFont(Font.font(currentFontFamily, currentFontWeight, currentFontPosture, currentFontSize));
+                    }
                 });
         fontPosture.selectedProperty().addListener(
-                (observable, oldValue, newValue) -> {
+                (_, _, newValue) -> {
                     if (newValue) currentFontPosture = FontPosture.ITALIC;
                     else currentFontPosture = FontPosture.REGULAR;
                     sampleLabel.setFont(Font.font(currentFontFamily, currentFontWeight, currentFontPosture, currentFontSize));
@@ -97,10 +90,6 @@ public class FontView {
             temp[i] = i + 7.0;
         }
         return temp;
-    }
-
-    private Font getUserFont() {
-        return null;
     }
 
     public void applyButtonAction() {

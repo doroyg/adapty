@@ -41,13 +41,9 @@
                     <SeparatorMenuItem mnemonicParsing="false" />
                     <MenuItem mnemonicParsing="false" onAction="#searchItemAction" text="Search" />
                 </Menu>
-                <Menu mnemonicParsing="false" text="Format">
-                    <Menu mnemonicParsing="false" text="List">
-                  <RadioMenuItem fx:id="numberListItem" mnemonicParsing="false" onAction="#numberListAction" text="Number" />
-                  <RadioMenuItem fx:id="letterListItem" mnemonicParsing="false" onAction="#letterListAction" text="Letter" />
-                  <RadioMenuItem fx:id="bulletListItem" mnemonicParsing="false" onAction="#bulletListAction" text="Bullet" />
-                  <RadioMenuItem fx:id="noneListItem" mnemonicParsing="false" onAction="#noneListAction" text="None" />
-                    </Menu>
+                <Menu mnemonicParsing="false" text="Insert">
+                    <MenuItem mnemonicParsing="false" onAction="#dateTimeAction" text="Date / Time" />
+               <MenuItem mnemonicParsing="false" onAction="#smileysItemAction" text="Smileys" />
                 </Menu>
                 <Menu mnemonicParsing="false" text="Settings">
                     <Menu mnemonicParsing="false" text="Theme">
@@ -83,20 +79,22 @@
     <center>
         <TabPane fx:id="tabPane" focusTraversable="false" BorderPane.alignment="CENTER" />
     </center>
-   <bottom>
-       <HBox spacing="5.0" BorderPane.alignment="CENTER">
-           <Label fx:id="notificationLabel">
-            <font>
-               <Font size="10.0" />
-            </font></Label>
-           <Region fx:id="footerRegion" />
-           <Label fx:id="encodingLabel" alignment="TOP_LEFT" text="UTF-8">
-            <font>
-               <Font size="10.0" />
-            </font></Label>
-         <padding>
-            <Insets bottom="5.0" left="12.0" right="12.0" top="5.0" />
-         </padding>
-       </HBox>
-   </bottom>
+    <bottom>
+        <HBox spacing="5.0" BorderPane.alignment="CENTER">
+            <Label fx:id="notificationLabel">
+                <font>
+                    <Font size="10.0" />
+                </font>
+            </Label>
+            <Region fx:id="footerRegion" />
+            <Label fx:id="encodingLabel" alignment="TOP_LEFT" text="UTF-8">
+                <font>
+                    <Font size="10.0" />
+                </font>
+            </Label>
+            <padding>
+                <Insets bottom="5.0" left="12.0" right="12.0" top="5.0" />
+            </padding>
+        </HBox>
+    </bottom>
 </BorderPane>
