@@ -6,7 +6,7 @@
       <option name="myIgnoreVendorSpecificProperties" value="false" />
       <option name="myCustomPropertiesList">
         <value>
-          <list size="13">
+          <list size="19">
             <item index="0" class="java.lang.String" itemvalue="-fx-background-color" />
             <item index="1" class="java.lang.String" itemvalue="-fx-base" />
             <item index="2" class="java.lang.String" itemvalue="-fx-border-width" />
@@ -20,6 +20,12 @@
             <item index="10" class="java.lang.String" itemvalue="-fx-font-size" />
             <item index="11" class="java.lang.String" itemvalue="-fx-focus-color" />
             <item index="12" class="java.lang.String" itemvalue="-fx-faint-focus-color" />
+            <item index="13" class="java.lang.String" itemvalue="-fx-text-fill" />
+            <item index="14" class="java.lang.String" itemvalue="-fx-accent" />
+            <item index="15" class="java.lang.String" itemvalue="-fx-pref-height" />
+            <item index="16" class="java.lang.String" itemvalue="-fx-highlight-text-fill" />
+            <item index="17" class="java.lang.String" itemvalue="-fx-highlight-fill" />
+            <item index="18" class="java.lang.String" itemvalue="-fx-shape" />
           </list>
         </value>
       </option>

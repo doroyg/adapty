@@ -5,11 +5,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="57.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pakt.adapty.controller.ClearView">
-    <Label layoutX="14.0" layoutY="26.0" prefHeight="27.0" prefWidth="121.0" text="Clearing all texts..." AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="57.0"
+            prefWidth="200.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.pakt.adapty.controller.ClearView">
+    <Label layoutX="14.0" layoutY="26.0" prefHeight="27.0" prefWidth="121.0" text="Clearing all texts..."
+           AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
         <font>
-          <Font size="14.0" />
+            <Font size="14.0"/>
         </font>
     </Label>
-    <Button fx:id="clearAllTextsButton" layoutX="226.0" layoutY="22.0" mnemonicParsing="false" onAction="#clearAllTextsAction" text="OK" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
+    <Button fx:id="clearAllTextsButton" layoutX="226.0" layoutY="22.0" mnemonicParsing="false"
+            onAction="#clearAllTextsAction" text="OK" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0"/>
 </AnchorPane>

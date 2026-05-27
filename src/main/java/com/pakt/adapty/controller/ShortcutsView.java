@@ -13,12 +13,5 @@ public class ShortcutsView {
         var shortcutsFilePath = Paths.get("src/main/resources/data/shortcuts.txt");
         FileIO.createFile(shortcutsFilePath);
         FileIO.readFile(shortcutsFilePath, shortcutsTextArea);
-
-        // TO EDIT SHORTCUTS
-//        shortcutsTextArea.setOnKeyPressed(event -> {
-//            if (event.getCode() == KeyCode.ALT) {
-//                FileIO.writeFile(shortcutsFilePath, shortcutsTextArea);
-//            }
-//        });
     }
 }

@@ -1,0 +1,158 @@
+/* ROOT */
+.root {
+    -fx-accent: #287b97;
+}
+
+
+/* MENU */
+.menu-bar {
+    -fx-background-color: #464749;
+}
+
+.menu {
+    -fx-padding: 4 8 4 8;
+}
+
+.menu .right-container .arrow {
+    -fx-background-color: #0090ff;
+}
+
+.menu .label {
+    -fx-text-fill: #e9f0fb;
+}
+
+.check-menu-item .check {
+    -fx-background-color: #0090ff;
+}
+
+.radio-menu-item:checked > .left-container > .radio {
+    -fx-background-color: #0090ff;
+}
+
+.context-menu {
+    -fx-background-color: #464749;
+}
+
+.context-menu .menu-item {
+    -fx-font-size: 12;
+    -fx-padding: 3 12 3 12;
+}
+
+.context-menu .menu-item. .label {
+    -fx-text-fill: #e9f0fb;
+}
+
+.context-menu .label {
+    -fx-text-fill: #e9f0fb;
+}
+
+.tool-bar {
+    -fx-background-color: #2f3032;
+    -fx-spacing: 8;
+}
+
+.separator .line {
+    -fx-border-color: #464749;
+    -fx-border-width: .5;
+}
+
+.button {
+    -fx-background-color: #464749;
+}
+
+.button:hover {
+    -fx-background-color: #545456;
+}
+
+.button:pressed {
+    -fx-background-color: #5e5e60;
+}
+
+.tooltip {
+    -fx-text-fill: #e9f0fb;
+    -fx-background-color: #000000b0;
+    -fx-padding: 4 8;
+    -fx-font-size: 11;
+}
+
+/* TEXT AREA */
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #2f3032;
+}
+
+.tab-pane .tab-close-button {
+    -fx-background-color: #191a1c;
+}
+
+#editor-box {
+    -fx-background-color: #191a1c;
+}
+
+.tab {
+    -fx-background-color: #8a8a8b;
+}
+
+.tab .tab-label {
+    -fx-font-size: 12;
+    -fx-text-fill: #191a1c;
+}
+
+.text-area {
+    -fx-text-fill: #81c8ff;
+    -fx-background-color: #191a1c;
+    -fx-highlight-fill: #287b97;
+    -fx-highlight-text-fill: #e9f0fb;
+}
+
+.text-area:focused {
+    -fx-highlight-fill: #287b97;
+    -fx-highlight-text-fill: #e9f0fb;
+}
+
+.text-area .content {
+    -fx-background-color: #191a1c;
+}
+
+.scroll-bar:vertical {
+    -fx-pref-width: 10;
+}
+
+.scroll-bar:horizontal {
+    -fx-pref-height: 10;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #464749;
+}
+
+.scroll-bar .track {
+    -fx-background-color: #191a1c;
+}
+
+.scroll-pane .corner {
+    -fx-background-color: #191a1c;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-shape: "";
+}
+
+.scroll-bar > .increment-button > .increment-arrow,
+.scroll-bar > .decrement-button > .decrement-arrow {
+    -fx-shape: "";
+    -fx-padding: 0;
+}
+
+/* FOOTER */
+
+ #notification-box {
+    -fx-background-color: #2f3032;
+}
+
+ #notification-box .label {
+     -fx-text-fill: #b0c4de;
+ }

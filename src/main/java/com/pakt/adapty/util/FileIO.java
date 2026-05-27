@@ -51,9 +51,7 @@ public final class FileIO {
                     String line;
                     while ((line = reader.readLine()) != null) {
                         final String currentLine = line;
-                        Platform.runLater(() -> {
-                            textArea.appendText(currentLine + "\n");
-                        });
+                        Platform.runLater(() -> textArea.appendText(currentLine + "\n"));
                         Thread.sleep(10);
                     }
                 } catch (Exception e) {

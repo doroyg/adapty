@@ -23,27 +23,30 @@
         <VBox BorderPane.alignment="CENTER">
             <MenuBar>
                 <Menu mnemonicParsing="false" text="File">
-                    <MenuItem fx:id="newMenuItem" mnemonicParsing="false" onAction="#newFileItemAction" text="New File" />
-                    <MenuItem fx:id="openMenuItem" mnemonicParsing="false" onAction="#openFileItemAction" text="Open File" />
-                    <MenuItem fx:id="saveMenuItem" mnemonicParsing="false" onAction="#saveFileItemAction" text="Save File" />
-                    <MenuItem fx:id="saveAsMenuItem" mnemonicParsing="false" onAction="#saveAsFileItemAction" text="Save As File" />
-                    <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" onAction="#closeItemAction" text="Close" />
+                    <MenuItem mnemonicParsing="false" onAction="#newFileItemAction" text="New File" />
+                    <MenuItem mnemonicParsing="false" onAction="#openFileItemAction" text="Open File" />
+                    <MenuItem mnemonicParsing="false" onAction="#closeFileItemAction" text="Close File" />
+               <SeparatorMenuItem mnemonicParsing="false" />
+                    <MenuItem mnemonicParsing="false" onAction="#saveFileItemAction" text="Save File" />
+                    <MenuItem mnemonicParsing="false" onAction="#saveAsFileItemAction" text="Save As File" />
+               <SeparatorMenuItem mnemonicParsing="false" />
+                    <MenuItem mnemonicParsing="false" onAction="#closeItemAction" text="Quit" />
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
-                    <MenuItem fx:id="undoMenuItem" mnemonicParsing="false" onAction="#undoItemAction" text="Undo" />
-                    <MenuItem fx:id="redoMenuItem" mnemonicParsing="false" onAction="#redoItemAction" text="Redo" />
+                    <MenuItem mnemonicParsing="false" onAction="#undoItemAction" text="Undo" />
+                    <MenuItem mnemonicParsing="false" onAction="#redoItemAction" text="Redo" />
                     <SeparatorMenuItem mnemonicParsing="false" />
-                    <MenuItem fx:id="cutMenuItem" mnemonicParsing="false" onAction="#cutItemAction" text="Cut" />
-                    <MenuItem fx:id="copyMenuItem" mnemonicParsing="false" onAction="#copyItemAction" text="Copy" />
-                    <MenuItem fx:id="pasteMenuItem" mnemonicParsing="false" onAction="#pasteItemAction" text="Paste" />
-                    <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" onAction="#deleteItemAction" text="Delete" />
-                    <MenuItem fx:id="clearMenuItem" mnemonicParsing="false" onAction="#clearItemAction" text="Clear" />
+                    <MenuItem mnemonicParsing="false" onAction="#cutItemAction" text="Cut" />
+                    <MenuItem mnemonicParsing="false" onAction="#copyItemAction" text="Copy" />
+                    <MenuItem mnemonicParsing="false" onAction="#pasteItemAction" text="Paste" />
+                    <MenuItem mnemonicParsing="false" onAction="#deleteItemAction" text="Delete" />
+                    <MenuItem mnemonicParsing="false" onAction="#clearItemAction" text="Clear" />
                     <SeparatorMenuItem mnemonicParsing="false" />
                     <MenuItem mnemonicParsing="false" onAction="#searchItemAction" text="Search" />
                 </Menu>
                 <Menu mnemonicParsing="false" text="Insert">
                     <MenuItem mnemonicParsing="false" onAction="#dateTimeAction" text="Date / Time" />
-               <MenuItem mnemonicParsing="false" onAction="#smileysItemAction" text="Smileys" />
+                    <MenuItem mnemonicParsing="false" onAction="#smileysItemAction" text="Smileys" />
                 </Menu>
                 <Menu mnemonicParsing="false" text="Settings">
                     <Menu mnemonicParsing="false" text="Theme">
@@ -52,7 +55,7 @@
                         <RadioMenuItem fx:id="defaultThemeMenuItem" mnemonicParsing="false" text="Default" />
                     </Menu>
                     <CheckMenuItem fx:id="wrapMenuItem" mnemonicParsing="false" text=" Wrap Text" />
-                    <MenuItem fx:id="fontMenuItem" mnemonicParsing="false" onAction="#fontAction" text="Font" />
+                    <MenuItem mnemonicParsing="false" onAction="#fontAction" text="Font" />
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <MenuItem mnemonicParsing="false" onAction="#shortcutsItemAction" text="Shortcuts" />
@@ -77,10 +80,10 @@
         </VBox>
     </top>
     <center>
-        <TabPane fx:id="tabPane" focusTraversable="false" BorderPane.alignment="CENTER" />
+        <TabPane id="editor-box" fx:id="tabPane" focusTraversable="false" BorderPane.alignment="CENTER" />
     </center>
     <bottom>
-        <HBox spacing="5.0" BorderPane.alignment="CENTER">
+        <HBox id="notification-box" spacing="5.0" BorderPane.alignment="CENTER">
             <Label fx:id="notificationLabel">
                 <font>
                     <Font size="10.0" />

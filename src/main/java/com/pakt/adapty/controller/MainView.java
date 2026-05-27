@@ -8,7 +8,6 @@ import com.pakt.adapty.util.SvgContentMap;
 import com.pakt.adapty.util.Theme;
 import com.pakt.adapty.util.UIConfig;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -53,25 +52,10 @@ public class MainView {
     public BorderPane root;
     public TabPane tabPane;
 
-    public MenuItem newMenuItem;
-    public MenuItem openMenuItem;
-    public MenuItem saveMenuItem;
-    public MenuItem saveAsMenuItem;
-    public MenuItem closeMenuItem;
-
-    public MenuItem undoMenuItem;
-    public MenuItem redoMenuItem;
-    public MenuItem cutMenuItem;
-    public MenuItem copyMenuItem;
-    public MenuItem pasteMenuItem;
-    public MenuItem deleteMenuItem;
-    public MenuItem clearMenuItem;
-
     public RadioMenuItem lightThemeMenuItem;
     public RadioMenuItem darkThemeMenuItem;
     public RadioMenuItem defaultThemeMenuItem;
     public CheckMenuItem wrapMenuItem;
-    public MenuItem fontMenuItem;
 
     public MenuItem aboutMenuItem;
 
@@ -250,6 +234,14 @@ public class MainView {
         createTab(FileIO.getFileExplorer(ExplorerJob.OPEN_FILE));
     }
 
+    public void closeFileItemAction() {
+        var tab = currentTab;
+        if (tabPane.getTabs().size() == 1) {
+            createTab();
+        }
+        tabPane.getTabs().remove(tab);
+    }
+
     public void saveFileItemAction() {
         if (currentTab != null) {
             var currentTabFile = currentTab.getFile();
@@ -280,7 +272,7 @@ public class MainView {
         }
     }
 
-    public void redoItemAction(ActionEvent event) {
+    public void redoItemAction() {
         if (currentTab != null) {
             var currentTextArea = currentTab.getTextArea();
             if (currentTextArea.isRedoable()) {
@@ -351,7 +343,7 @@ public class MainView {
             var currentTextArea = currentTab.getTextArea();
             var caretPos = currentTextArea.getCaretPosition();
             var dateTime = LocalDateTime.now();
-            var formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+            var formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy_HH:mm:ss");
             var dateTimeText = dateTime.format(formatter);
             var selectionIndex = currentTextArea.getSelection();
             if (selectionIndex.getLength() > 0) {
@@ -402,7 +394,7 @@ public class MainView {
         }
     }
 
-    public void aboutItemAction(ActionEvent event) {
+    public void aboutItemAction() {
         try {
             var aboutStage = new Stage();
             AnchorPane aboutView = FXMLLoader.load(Objects.requireNonNull(
@@ -439,7 +431,7 @@ public class MainView {
         }
     }
 
-    public void undoButtonAction(ActionEvent event) {
+    public void undoButtonAction() {
         if (currentTab != null) {
             var currentTextArea = currentTab.getTextArea();
             if (currentTextArea.isUndoable()) {
@@ -448,7 +440,7 @@ public class MainView {
         }
     }
 
-    public void redoButtonAction(ActionEvent event) {
+    public void redoButtonAction() {
         if (currentTab != null) {
             var currentTextArea = currentTab.getTextArea();
             if (currentTextArea.isRedoable()) {
@@ -593,7 +585,17 @@ public class MainView {
         svgShape.setMinSize(svgSize, svgSize);
         svgShape.setPrefSize(svgSize, svgSize);
         svgShape.setMaxSize(svgSize, svgSize);
-        svgShape.setBackground(Background.fill(Color.valueOf("#22252b")));
+
+        var editorSettingsProperties = new UIConfig(editorSettingsPath).getProperties();
+        var themeLoaded = editorSettingsProperties.getProperty("theme");
+        if (themeLoaded.contains("light")) {
+            svgShape.setBackground(Background.fill(Color.valueOf("#23415a")));
+        } else if  (themeLoaded.contains("dark")) {
+            svgShape.setBackground(Background.fill(Color.valueOf("#4cb1ff")));
+        } else if  (themeLoaded.contains("default")) {
+            svgShape.setBackground(Background.fill(Color.valueOf("#22252b")));
+        }
+
         return svgShape;
     }
 

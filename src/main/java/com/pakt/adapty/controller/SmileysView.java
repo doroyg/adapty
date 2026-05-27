@@ -245,7 +245,7 @@ public class SmileysView {
                 var currentTextArea = MainView.currentTab.getTextArea();
                 var caretPos =  currentTextArea.getCaretPosition();
                 currentTextArea.insertText(caretPos, smiley.getText());
-            };
+            }
         });
     }
 }

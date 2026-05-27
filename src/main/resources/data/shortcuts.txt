@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 All standard text area shortcuts plus these:
 -------------------------------------------------------------------------------
-Close Application						Ctrl + ESC
+Quit Application						Ctrl + ESC
 
 New Tab								Ctrl + T
 Close Tab							Ctrl + X

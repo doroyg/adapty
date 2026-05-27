@@ -85,9 +85,9 @@ public class FontView {
     }
 
     private Double[]  getSizes() {
-        var temp = new Double[36];
+        var temp = new Double[32];
         for (int i = 0; i < temp.length; i++) {
-            temp[i] = i + 7.0;
+            temp[i] = i + 9.0;
         }
         return temp;
     }

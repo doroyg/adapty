@@ -1,9 +1,11 @@
 package com.pakt.adapty;
 
+import com.pakt.adapty.util.UIConfig;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -11,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 public class Adapty extends Application {
@@ -34,5 +37,26 @@ public class Adapty extends Application {
         stage.setMinHeight(520.0);
         stage.show();
         stage.centerOnScreen();
+        loadIcon();
+    }
+
+    private void loadIcon() {
+        var editorSettingsPath = Paths.get(
+                "src/main/resources/data/editor-settings.properties");
+        var editorSettingsProperties = new UIConfig(editorSettingsPath).getProperties();
+        var themeLoaded = editorSettingsProperties.getProperty("theme");
+        if (themeLoaded.contains("light")) {
+            stage.getIcons().add(new Image(
+                    Objects.requireNonNull(
+                            Adapty.class.getResourceAsStream("/icons/dragon-solid-full_light.svg"))));
+        } else if  (themeLoaded.contains("dark")) {
+            stage.getIcons().add(new Image(
+                    Objects.requireNonNull(
+                            Adapty.class.getResourceAsStream("/icons/dragon-solid-full_dark.svg"))));
+        } else if  (themeLoaded.contains("default")) {
+            stage.getIcons().add(new Image(
+                    Objects.requireNonNull(
+                            Adapty.class.getResourceAsStream("/icons/dragon-solid-full_default.svg"))));
+        }
     }
 }
