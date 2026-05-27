@@ -217,13 +217,13 @@ public class MainView {
 
     //
     private void setEditorSettingsOnClose () {
-        Adapty.stage.fireEvent(new WindowEvent(Adapty.stage, WindowEvent.WINDOW_CLOSE_REQUEST));
         Adapty.stage.setOnCloseRequest(_ -> {
             var newProp = new UIConfig(editorSettingsPath);
             newProp.addEntry("theme", selectedTheme.getFilePath());
             newProp.addEntry("wrap", String.valueOf(isWrap));
             newProp.setProperties();
         });
+        Adapty.stage.fireEvent(new WindowEvent(Adapty.stage, WindowEvent.WINDOW_CLOSE_REQUEST));
     }
 
     public void newFileItemAction() {
@@ -260,7 +260,7 @@ public class MainView {
     }
 
     public void closeItemAction() {
-        Platform.exit();
+        setEditorSettingsOnClose();
     }
 
     public void undoItemAction() {

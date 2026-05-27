@@ -127,11 +127,11 @@
 }
 
 .scroll-bar .track {
-    /*-fx-background-color: ;*/
+    -fx-background-color: transparent;
 }
 
 .scroll-pane .corner {
-    /*-fx-background-color: #;*/
+    -fx-background-color: transparent;
 }
 
 .scroll-bar .increment-button,

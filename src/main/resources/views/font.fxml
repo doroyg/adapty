@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="365.0"
-            prefWidth="410.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"
+            prefWidth="410.0" stylesheets="@../styles/windows.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.pakt.adapty.controller.FontView">
     <ListView fx:id="fontFamilyList" layoutX="14.0" layoutY="54.0" prefHeight="200.0" prefWidth="180.0"
               AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="50.0"/>

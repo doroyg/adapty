@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="210.0"
-            prefWidth="450.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"
+            prefWidth="450.0" stylesheets="@../styles/windows.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.pakt.adapty.controller.SearchView">
     <TextField fx:id="searchField" layoutX="26.0" layoutY="54.0" prefWidth="335.0" AnchorPane.leftAnchor="15.0"
                AnchorPane.topAnchor="50.0"/>
