@@ -1,5 +1,6 @@
 package com.pakt.adapty.controller;
 
+import com.pakt.adapty.Adapty;
 import com.pakt.adapty.util.UIConfig;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Button;
@@ -10,9 +11,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
+import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class FontView {
 
@@ -28,7 +31,16 @@ public class FontView {
     private double currentFontSize;
     private FontPosture currentFontPosture;
 
-    public static final Path fontSettingsPath = Paths.get("src/main/resources/data/font-settings.properties");
+    public static Path fontSettingsPath;
+
+    static {
+        try {
+            fontSettingsPath = Paths.get(Objects.requireNonNull(
+                    Adapty.class.getResource("/data/font-settings.properties")).toURI());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void initialize() {
         var fontFamilies = FXCollections.observableArrayList(Font.getFamilies());

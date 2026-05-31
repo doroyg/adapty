@@ -1,9 +1,13 @@
 package com.pakt.adapty.util;
 
+import com.pakt.adapty.Adapty;
+
+import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class SvgContentMap {
 
@@ -19,7 +23,12 @@ public class SvgContentMap {
     }
 
     private void createPath() {
-        path = Paths.get("src/main/resources/data/svg-content.dat");
+        try {
+            path = Paths.get(Objects.requireNonNull(
+                    Adapty.class.getResource("/data/svg-content.dat")).toURI());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
         FileIO.createFile(path);
     }
 

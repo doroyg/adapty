@@ -41,6 +41,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
@@ -79,11 +80,19 @@ public class MainView {
     public static Stage fontStage;
 
     private final ToggleGroup themeGroup = new ToggleGroup();
-    public static final Path editorSettingsPath = Paths.get(
-            "src/main/resources/data/editor-settings.properties");
+    public static Path editorSettingsPath;
 
     private boolean isWrap;
     private Theme selectedTheme;
+
+    public MainView() {
+        try {
+            editorSettingsPath = Paths.get(Objects.requireNonNull(
+                    Adapty.class.getResource("/data/editor-settings.properties")).toURI());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void initialize() {
         var svgContentMap = new SvgContentMap();

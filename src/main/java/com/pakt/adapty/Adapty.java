@@ -13,6 +13,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
@@ -41,22 +43,24 @@ public class Adapty extends Application {
     }
 
     private void loadIcon() {
-        var editorSettingsPath = Paths.get(
-                "src/main/resources/data/editor-settings.properties");
+        Path editorSettingsPath;
+        try {
+            editorSettingsPath = Paths.get(Objects.requireNonNull(
+                    Adapty.class.getResource("/data/editor-settings.properties")).toURI());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
         var editorSettingsProperties = new UIConfig(editorSettingsPath).getProperties();
         var themeLoaded = editorSettingsProperties.getProperty("theme");
         if (themeLoaded.contains("light")) {
-            stage.getIcons().add(new Image(
-                    Objects.requireNonNull(
-                            Adapty.class.getResourceAsStream("/icons/dragon-solid-full_light.svg"))));
+            stage.getIcons().add(new Image(Objects.requireNonNull(
+                    Adapty.class.getResourceAsStream("/icons/dragon-solid-full_light.svg"))));
         } else if  (themeLoaded.contains("dark")) {
-            stage.getIcons().add(new Image(
-                    Objects.requireNonNull(
-                            Adapty.class.getResourceAsStream("/icons/dragon-solid-full_dark.svg"))));
+            stage.getIcons().add(new Image(Objects.requireNonNull(
+                    Adapty.class.getResourceAsStream("/icons/dragon-solid-full_dark.svg"))));
         } else if  (themeLoaded.contains("default")) {
-            stage.getIcons().add(new Image(
-                    Objects.requireNonNull(
-                            Adapty.class.getResourceAsStream("/icons/dragon-solid-full_default.svg"))));
+            stage.getIcons().add(new Image(Objects.requireNonNull(
+                    Adapty.class.getResourceAsStream("/icons/dragon-solid-full_default.svg"))));
         }
     }
 }
